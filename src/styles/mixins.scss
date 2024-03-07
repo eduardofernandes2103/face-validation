@@ -1,0 +1,67 @@
+@use "sass:map";
+@use "sass:color";
+@import "./variables.scss";
+
+@mixin text($variant) {
+  font-size: map.get($atmk-font, #{$variant}-size);
+  font-weight: map.get($atmk-font, #{$variant}-weight);
+  font-style: map.get($atmk-font, #{$variant}-style);
+  font-stretch: map.get($atmk-font, #{$variant}-stretch);
+}
+
+@function color($variant) {
+  @return map.get($atmk-color, $variant);
+}
+
+@function font($variant) {
+  @return map.get($atmk-font, $variant)
+}
+
+@function color-alpha($variant, $alpha: 1) {
+  $color: map.get($atmk-color, $variant);
+  @return rgba($color, $alpha);
+}
+
+@function size($variant) {
+  @return map.get($atmk-size, $variant);
+}
+
+@function opacity($variant) {
+  @return map.get($atmk-opacity, $variant);
+}
+
+@function shadow($variant) {
+  @return map.get($atmk-shadow, $variant);
+}
+
+@function map-collect($lists...) {
+  $collection: ();
+
+  @each $map in $lists {
+    $collection: map.merge($collection, $map);
+  }
+  @return $collection;
+}
+
+@function atmk($variant) {
+  $variables: map-collect(
+    $atmk-color,
+    $atmk-font,
+    $atmk-shadow,
+    $atmk-opacity,
+    $atmk-size
+  );
+  @return map.get($variables, $variant);
+}
+
+@mixin media-min($breakpoint) {
+  @media screen and (min-width: #{$breakpoint}px) {
+    @content;
+  }
+}
+
+@mixin media-max($breakpoint) {
+  @media screen and (max-width: #{$breakpoint}px) {
+    @content;
+  }
+}
