@@ -1,0 +1,63 @@
+@import '../../styles/mixins.scss';
+
+.container{
+  display: flex;
+  flex-direction: column;
+  margin: size("margin-small") 0;
+
+  label{
+    color: color("text-tertiary");
+    font-size: font("body2-size");
+    margin-bottom: size("margin-ultra-small");
+  }
+
+  .inputWrapper{
+    position: relative;
+    display: flex;
+  }
+
+  input{
+    border-radius: size("border-radius-small");
+    padding: size("padding-extra-small") size("padding-small");
+    border: 1px solid color("grayscale-semi-light");
+    font-family: 'Poppins';
+    font-size: font("body2-size");
+    min-width: 50%;
+    color: color("text-primary");
+    flex: 1;
+
+    &::placeholder{
+      color: color("text-secondary");
+    }
+
+    &:focus{
+      border: 1px solid color("main");
+      box-shadow: shadow("shadow-3");
+      outline: none;
+    }
+  }
+
+  &.error{
+    label{
+      color: color("error-main");
+    }
+    input{
+      border: 1px solid color("error-main");
+    }
+  }
+
+  .showPasswordButton{
+    border: none;
+    background-color: transparent;
+    width: fit-content;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 3%;
+    transform: translateY(-50%);
+
+    .showPasswordIcon{
+      color: color("main");
+    }
+  }
+}
