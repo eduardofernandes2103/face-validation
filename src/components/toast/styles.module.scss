@@ -1,0 +1,33 @@
+@import '../../styles/mixins.scss';
+
+.container{
+  display: flex;
+  border-radius: size("border-radius-extra-small");
+  max-width: 300px;
+  position: fixed;
+  right: size("margin-regular");
+  bottom: size("margin-regular");
+  padding: 0 size("padding-small");
+  box-shadow: shadow("shadow-8");
+  background-color: color("lightest");
+  .content{
+    h4{
+      font-weight: font("body1-weight");
+      color: color("text-primary");
+    }
+    p{
+      font-size: font("subtitle2-size");
+      color: color("text-primary");
+    }
+  }
+  button{
+    border: none;
+    font-family: font("button-family");
+    font-weight: font("body1-bold-weight");
+    color: color("text-secondary");
+    align-self: flex-start;
+    margin-top: size("margin-regular");
+    background-color: transparent;
+    cursor: pointer;
+  }
+}
