@@ -3,7 +3,7 @@ import { agentLoginPayload, agentSuccessResponse } from '@/server/model/agents/a
 import agentsService from '@/server/service/agents/agents-service';
 import { HttpStatus } from '@/assets/enum/http-status';
 
-const usersController = () => {
+const agentsController = () => {
   const takeAuth = async (
     data: agentLoginPayload
   ): Promise<agentSuccessResponse | undefined> => {
@@ -27,4 +27,4 @@ const usersController = () => {
   };
 };
 
-export default usersController();
+export default agentsController();
