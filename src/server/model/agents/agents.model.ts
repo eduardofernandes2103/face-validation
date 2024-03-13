@@ -4,8 +4,5 @@ export interface agentLoginPayload {
 }
 
 export interface agentSuccessResponse {
-  response: {
-    token: string;
-  };
+  response: string;
 }
-  
