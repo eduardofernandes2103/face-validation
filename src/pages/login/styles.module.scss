@@ -1,0 +1,64 @@
+@import '../../styles/mixins.scss';
+
+.container{
+  max-width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #34a0a4, #1a759f);
+  
+  h2{
+    margin: 0;
+    color: #ffffff;
+  }
+
+  span{
+    color: #ced1d5;
+    font-size: 12px;
+    margin: 10px 0 20px 0;
+  }
+
+  form{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    align-items: center;
+
+    input{
+      border-radius: size("border-radius-extra-small");
+      padding: size("padding-extra-small") size("padding-small");
+      border: 1px solid color("grayscale-semi-light");
+      font-family: 'Poppins';
+      font-size: font("body2-size");
+      width: 90%;
+      color: #ffffff;
+      margin: 10px 0;
+      background-color: #2a6f97;
+  
+      &::placeholder{
+        color: #ced1d5;
+      }
+  
+      &:focus{
+        border: 1px solid color("main");
+        box-shadow: shadow("shadow-3");
+        outline: none;
+      }
+    }
+
+    button{
+      margin-top: 20px;
+      background-color: #ffffff;
+      color: #023e8a;
+      font-weight: 600;
+      border: none;
+      font-family: 'Poppins';
+      width: 100%;
+      padding: 10px 0;
+      border-radius: 8px;
+    }
+  }
+}

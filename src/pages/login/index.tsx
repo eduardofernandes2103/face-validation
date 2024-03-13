@@ -1,40 +1,65 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import Button from '../../components/button'; 
 import Input from '../../components/input';
+import styles from './styles.module.scss';
+import { agentLoginPayload } from '@/server/model/agents/agents.model';
+import agentsController from '@/server/controller/agents/agents-controller';
+import Toast from '@/components/toast';
+import { CircularProgress } from '@mui/material';
 
 export default function Login() {
-  const { register, handleSubmit } = useForm();
+  const router = useRouter();
+
+  const [shouldOpenToastError, setShouldOpenToastError] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const formSchema = yup.object().shape({
+    email: yup.string().email().required('Campo obrigatório'),
+    password: yup.string().min(8).required('Campo obrigatório')
+  })
+
+  const { register, handleSubmit, formState: { errors } } = useForm<any>({resolver: yupResolver(formSchema)});
+
+  const onSubmitFunction = async (data: agentLoginPayload) => {
+    setIsLoading(true);
+    agentsController.takeAuth(data)
+    .then((res) => {
+      localStorage.setItem('token', res!.response);
+      router.push('/agent-dashboard')
+      setIsLoading(false);
+    })
+    .catch((err) => {
+      console.error(err);
+      setShouldOpenToastError(true);
+      setIsLoading(false);
+    })
+  }
 
   return (
-    <div style={styles.container}>
-      <h1 className="logoLogin">Login</h1>
-      <form>
-        <Input name="username" register={register} placeholder="Nome de usuário" label='Usuario' />
+    <div className={styles.container}>
+      <h2>Login</h2>
+      <span>Preencha seus dados para entrar na aplicação</span>
+      <form onSubmit={handleSubmit(onSubmitFunction)}>
+        <input {...register('email')} placeholder="Digite seu email" />
 
-        <Input name="password" register={register} type="password" placeholder="Senha" label="Senha" />
+        <input {...register('password')} type='password' placeholder="Digite sua senha"/>
 
-        <Button isDefault={true} type="submit">Entrar</Button>
+        {isLoading ? (
+          <CircularProgress />
+        ) : (
+          <button type="submit">Entrar</button>
+        )}
       </form>
+      <Toast shouldOpenToast={shouldOpenToastError}
+        shouldCloseToast={() => setShouldOpenToastError(false)} 
+        toastTitle="Algo deu errado">
+        Confira se seu email ou senha estão corretos.
+      </Toast>
     </div>
   );
 }
-
-const styles = {
-  container: {
-    width: '300px',
-    heighr: '300px',
-    padding: '25px',
-    margin: 'auto',
-    marginTop: '100px',
-    boxShadow: '0 0 8px rgba(0, 0, 0, 0.30)'
-  },
-  input: {
-    height: '40px',
-  },
-  logoFont: {
-    margin: '0',
-    padding: '0',
-  }
-};
 
