@@ -25,7 +25,7 @@ export default function ProducerTickets(){
     <div className={styles.container}>
       <div className={styles.content}>
         <h2>Lista de cortesias</h2>
-        <span>Cortesias geradas: {freeTickets.length}</span>
+        <span>Cortesias geradas: {freeTickets?.length}</span>
         <div className={styles.buttonWrapper}>
           <Button isDefault>Gerar cortesia</Button>
         </div>
