@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import api from '../api';
-import { FreeTicketsSuccessResponse } from "@/server/model/tickets/tickets.model";
+import { CreateFreeTicketsPayload, CreateFreeTicketsSuccessResponse, FreeTicketsSuccessResponse } from "@/server/model/tickets/tickets.model";
 
 const ticketsService = () => {
   const getFreeTickets = async (token: string): Promise<AxiosResponse<FreeTicketsSuccessResponse | undefined>> => {
@@ -11,8 +11,17 @@ const ticketsService = () => {
     })
   }
 
+  const createFreeTickets = async (token: string, data: CreateFreeTicketsPayload):Promise<AxiosResponse<CreateFreeTicketsSuccessResponse | undefined>> => {
+    return api.post<CreateFreeTicketsSuccessResponse>('/free-tickets/create', data, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+  }
+
   return {
-    getFreeTickets
+    getFreeTickets,
+    createFreeTickets
   }
 }
 
