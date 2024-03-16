@@ -37,7 +37,7 @@ export default function Login() {
     agentsController.takeAuth(data)
     .then((res) => {
       localStorage.setItem('token', res!.response);
-      router.push('/agent-dashboard')
+      router.push('/producer-tickets')
       setIsLoading(false);
     })
     .catch((err) => {

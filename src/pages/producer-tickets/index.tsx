@@ -5,8 +5,10 @@ import styles from './styles.module.scss';
 import Button from "@/components/button";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/router";
 
 export default function ProducerTickets(){
+  const router = useRouter();
 
   const [freeTickets, setFreeTickets] = useState<any>();
 
@@ -14,6 +16,10 @@ export default function ProducerTickets(){
     await ticketsController.getFreeTickets(`${token}`).then((res) => {
       setFreeTickets(res?.response["free-tickets"])
     }).catch((err) => console.error(err))
+  }
+
+  const handleRedirectToCreateTickets = () => {
+    router.push('/create-tickets')
   }
 
   useEffect(() => {
@@ -27,7 +33,7 @@ export default function ProducerTickets(){
         <h2>Lista de cortesias</h2>
         <span>Cortesias geradas: {freeTickets?.length}</span>
         <div className={styles.buttonWrapper}>
-          <Button isDefault>Gerar cortesia</Button>
+          <Button isDefault onClick={() => handleRedirectToCreateTickets()}>Gerar cortesia</Button>
         </div>
         {freeTickets && (
           <div>
