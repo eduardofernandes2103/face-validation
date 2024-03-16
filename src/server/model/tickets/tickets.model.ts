@@ -22,3 +22,19 @@ export interface FreeTicketsErrorResponse{
     errors: string
   }
 }
+
+export interface CreateFreeTicketsPayload{
+  client_name: string,
+  client_email: string,
+  client_phone_number: string,
+}
+
+export interface CreateFreeTicketsSuccessResponse{
+  response: string;
+}
+
+export interface CreateFreeTicketsErrorResponse{
+  response: {
+    errors: string;
+  }
+}
