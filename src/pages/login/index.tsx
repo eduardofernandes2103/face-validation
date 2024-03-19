@@ -69,7 +69,7 @@ export default function Login() {
           </div>
           <Toast shouldOpenToast={shouldOpenToastError}
             shouldCloseToast={() => setShouldOpenToastError(false)} 
-            toastTitle="Algo deu errado">
+            toastTitle="Algo deu errado" type='error'>
             Confira se seu email ou senha estão corretos.
           </Toast>
         </div>
