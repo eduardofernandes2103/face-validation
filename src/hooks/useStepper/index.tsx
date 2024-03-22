@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { UseStepperProps } from '@/assets/types/useStepperProps';
 
-function useStepper({ maxSteps }: UseStepperProps) {
+function useStepper(maxSteps: number) {
   const stepInitialValue = 1;
   const [step, setStep] = useState(stepInitialValue);
   const [userDocument, setUserDocument] = useState('')
@@ -10,7 +10,6 @@ function useStepper({ maxSteps }: UseStepperProps) {
     if (step < maxSteps) {
       setStep(step + 1);
     }
-
     return;
   }
 
