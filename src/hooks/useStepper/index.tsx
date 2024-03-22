@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { UseStepperProps } from '@/assets/types/useStepperProps';
+import { UseStepperProps } from '../../assets/types/stepperProps';
 
 function useStepper(maxSteps: number) {
   const stepInitialValue = 1;
