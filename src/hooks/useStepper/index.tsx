@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { UseStepperProps } from '../../assets/types/stepperProps';
+import { StepperContextProps, UseStepperProps } from '../../assets/types/stepperProps';
 
-function useStepper({ maxSteps }: UseStepperProps) {
+function useStepper({ maxSteps }: UseStepperProps): StepperContextProps {
   const stepInitialValue = 1;
   const [step, setStep] = useState(stepInitialValue);
   const [userDocument, setUserDocument] = useState('')
