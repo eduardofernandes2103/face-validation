@@ -1,12 +1,10 @@
 import { Dispatch, ReactNode, SetStateAction } from "react";
 
-export interface StepperContextProps{
+export interface StepperProviderData {
   step: number;
   nextStep: () => void;
-  previousStep: () => void;
-  resetStep: () => void;
-  userDocument: string;
-  setUserDocument: Dispatch<SetStateAction<string>>;
+  userDocument: string | undefined;
+  setUserDocument: Dispatch<SetStateAction<string | undefined>>;
 }
 
 export interface StepperProviderProps{
