@@ -38,3 +38,14 @@ export interface CreateFreeTicketsErrorResponse{
     errors: string;
   }
 }
+
+export interface GenerateCredentialsImagePayload{
+  file: Blob
+}
+
+export interface Message {
+  message: string
+}
+export interface GenerateCredentialsImageSuccessResponse{
+  response: Message;
+}
