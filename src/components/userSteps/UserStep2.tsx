@@ -13,7 +13,7 @@ import Toast from '../toast';
 
 const UserStepTwo = () => {
   const { nextStep, setUserDocument } = UseStepper();
-  const [shouldOpenToastError, setShouldOpenToastError] = useState<boolean>(true);
+  const [shouldOpenToastError, setShouldOpenToastError] = useState<boolean>(false);
   
   const formSchema = yup.object().shape({
     cpf: yup.string().min(11).max(11).required('Campo obrigatório'),
@@ -48,7 +48,7 @@ const UserStepTwo = () => {
       </div>
       <Toast shouldOpenToast={shouldOpenToastError}
         shouldCloseToast={() => setShouldOpenToastError(false)} 
-        toastTitle="Algo deu errado">
+        toastTitle="Algo deu errado" dark type='error'>
         O CPF digitado não é válido
       </Toast>
     </div>
