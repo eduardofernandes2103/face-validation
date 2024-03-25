@@ -1,5 +1,11 @@
 import { HttpStatus } from "@/assets/enum/http-status"
-import { CreateFreeTicketsPayload, CreateFreeTicketsSuccessResponse, FreeTicketsSuccessResponse } from "@/server/model/tickets/tickets.model"
+import { 
+  CreateFreeTicketsPayload,
+  CreateFreeTicketsSuccessResponse, 
+  FreeTicketsSuccessResponse,
+  GenerateCredentialsImagePayload,
+  GenerateCredentialsImageSuccessResponse
+} from "@/server/model/tickets/tickets.model"
 import ticketsService from "@/server/service/tickets/tickets-service"
 import { AxiosError, AxiosResponse } from "axios"
 
@@ -30,9 +36,23 @@ const ticketsController = () => {
     }
   }
 
+  const generateCredentialsImage = async (image: GenerateCredentialsImagePayload, validationCode: string, cpf: string) => {
+    try{
+      const result: AxiosResponse<GenerateCredentialsImageSuccessResponse | undefined> = await ticketsService.generateCredentialsImage(image, validationCode, cpf);
+
+      if(result.status === HttpStatus.OK && result.data !== null){
+        return Promise.resolve(result.data);
+      }
+    } catch (error){
+      const { response } = error as AxiosError;
+      return Promise.reject(response);
+    }
+  }
+
   return{
     getFreeTickets,
-    createFreeTickets
+    createFreeTickets,
+    generateCredentialsImage
   }
 }
 
