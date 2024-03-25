@@ -1,21 +1,12 @@
 import styles from './styles.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import Button from '../button';
-import { useContext } from 'react';
-import { StepperContext } from '@/hooks/context/stepsContext';
+import { UseStepper } from '@/providers/stepper';
 
 const UserStepThree = () => {
-  const stepperContext = useContext(StepperContext);
+  const {nextStep} = UseStepper();
 
-  if (!stepperContext) {
-    console.log('stepperContext', stepperContext);
-    return null;
-  }
-  
-  const { nextStep } = stepperContext;
-  
   return(
     <div className={styles.container}>
       <div className={styles.content}>

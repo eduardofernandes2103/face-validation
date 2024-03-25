@@ -3,8 +3,6 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import Button from '../../components/button'; 
-import Input from '../../components/input';
 import styles from './styles.module.scss';
 import { agentLoginPayload } from '@/server/model/agents/agents.model';
 import agentsController from '@/server/controller/agents/agents-controller';
@@ -69,7 +67,7 @@ export default function Login() {
           </div>
           <Toast shouldOpenToast={shouldOpenToastError}
             shouldCloseToast={() => setShouldOpenToastError(false)} 
-            toastTitle="Algo deu errado">
+            toastTitle="Algo deu errado" type='error'>
             Confira se seu email ou senha estão corretos.
           </Toast>
         </div>

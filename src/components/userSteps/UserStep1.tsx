@@ -1,19 +1,10 @@
 import styles from './styles.module.scss';
 import Image from 'next/image';
 import LogoSphere from '../../assets/images/sphere_simbolo_branco.svg';
-import useStepper from '@/hooks/useStepper';
-import { useContext } from 'react';
-import { StepperContext } from '@/hooks/context/stepsContext';
+import { UseStepper } from '@/providers/stepper';
 
 const UserStepOne = () => {
-  const stepperContext = useContext(StepperContext);
-
-  if (!stepperContext) {
-    console.log('stepperContext', stepperContext);
-    return null;
-  }
-  const { nextStep } = stepperContext;
-
+  const {nextStep} = UseStepper();
   return(
     <div className={styles.overlay} onClick={() => nextStep()}>
       <div className={styles.firstLayer}>
