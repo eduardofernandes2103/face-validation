@@ -77,12 +77,12 @@ export default function CreateTickets(){
         </form>
         <Toast shouldOpenToast={shouldOpenToastError}
           shouldCloseToast={() => setShouldOpenToastError(false)} 
-          toastTitle="Algo deu errado">
+          toastTitle="Algo deu errado" type="error" dark>
           Não foi possível gerar uma nova cortesia
         </Toast>
         <Toast shouldOpenToast={shouldOpenToastSuccess}
           shouldCloseToast={() => setShouldOpenToastSuccess(false)} 
-          toastTitle="Cortesia gerada">
+          toastTitle="Cortesia gerada" type="success" dark>
           Cortesia gerada com sucesso
         </Toast>
       </div>
