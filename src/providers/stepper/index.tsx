@@ -7,6 +7,7 @@ export const StepperProvider = ({ children }: StepperProviderProps) => {
   const stepInitialValue = 1;
   const maxSteps = 5
   const [step, setStep] = useState<number>(stepInitialValue);
+  const [toastBehavior, setToastBehavior] = useState<boolean>(false);
   const [userDocument, setUserDocument] = useState<string | undefined>('');
 
   function nextStep() {
@@ -16,7 +17,16 @@ export const StepperProvider = ({ children }: StepperProviderProps) => {
   }
 
   return (
-    <StepContext.Provider value={{step, userDocument, setUserDocument, nextStep}}>
+    <StepContext.Provider value={{
+      step, 
+      setStep, 
+      toastBehavior, 
+      setToastBehavior, 
+      userDocument, 
+      setUserDocument, 
+      nextStep
+    }}
+    >
       {children}
     </StepContext.Provider>
   )

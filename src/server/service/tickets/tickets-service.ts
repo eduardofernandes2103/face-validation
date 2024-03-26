@@ -31,7 +31,7 @@ const ticketsService = () => {
     cpf: string
   ): Promise<AxiosResponse<GenerateCredentialsImageSuccessResponse | undefined>> => {
     const formData = new FormData();
-    formData.append('image', image.file);
+    formData.append('file', image.file);
     return api.post(`/free-tickets/${validationCode}/${cpf}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'

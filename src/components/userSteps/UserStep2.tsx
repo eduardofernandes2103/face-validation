@@ -10,8 +10,9 @@ import { CPFPayload } from '@/assets/types/useStepTwoProps';
 import { validateCheckDigitis } from '@/utils/validations';
 import { useState } from 'react';
 import Toast from '../toast';
+import { StepProps } from '@/assets/types/stepperProps';
 
-const UserStepTwo = () => {
+const UserStepTwo: React.FC<StepProps> = ({shouldRender}) => {
   const { nextStep, setUserDocument } = UseStepper();
   const [shouldOpenToastError, setShouldOpenToastError] = useState<boolean>(false);
   
@@ -32,7 +33,8 @@ const UserStepTwo = () => {
   }  
   
   return(
-    <div className={styles.container}>
+    shouldRender && (
+      <div className={styles.container}>
       <div className={styles.content}>
         <div className={styles.iconSelfieContainer}>
           <FontAwesomeIcon icon={faIdCard} size={'4x'} className={styles.icon} />
@@ -51,7 +53,8 @@ const UserStepTwo = () => {
         toastTitle="Algo deu errado" dark type='error'>
         O CPF digitado não é válido
       </Toast>
-    </div>
+    </div> 
+    )
   )
 }
 
