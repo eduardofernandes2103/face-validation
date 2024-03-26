@@ -14,3 +14,12 @@ export interface StepperProviderProps{
 export interface UseStepperProps {
   maxSteps: number;
 }
+
+export interface StepProps {
+  shouldRender: boolean;
+}
+
+export interface StepFourProps {
+  shouldRender: boolean;
+  codeValidation: string | string[] | undefined;
+}

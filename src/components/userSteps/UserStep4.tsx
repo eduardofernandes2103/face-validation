@@ -5,9 +5,11 @@ import Webcam from 'react-webcam';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons/faCamera';
 import Button from '../button';
+import { StepFourProps } from '@/assets/types/stepperProps';
+import { UseStepper } from '@/providers/stepper';
 
-const UserStepFour = () => {
-//   const {nextStep} = UseStepper();
+const UserStepFour: React.FC<StepFourProps> = ({shouldRender, codeValidation}) => {
+  const {nextStep} = UseStepper();
 
   const webcamRef = React.useRef<any>(null);
 
@@ -21,6 +23,7 @@ const UserStepFour = () => {
   }
 
   return(
+    shouldRender && (
     <div>
       <div style={{ width: '100vw', height: '100vh', position: 'relative', overflow: 'hidden', background: 'white'}}>
       {capturedImage ? (
@@ -28,7 +31,7 @@ const UserStepFour = () => {
           <img src={capturedImage} alt="Captured" style={{ width: '100%', objectFit: 'cover' }}/>
           <div className={styles.buttonContainer}>
             <Button isBorder onClick={() => setCapturedImage(null)}>Tentar novamente</Button>
-            <Button isDefault>Salvar foto</Button>
+            <Button isDefault onClick={() => nextStep()}>Salvar foto</Button>
           </div>
         </div>
       ):(
@@ -46,6 +49,7 @@ const UserStepFour = () => {
         )}
       </div>
     </div>
+    )
   )
 }
 
