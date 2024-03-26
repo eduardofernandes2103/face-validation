@@ -1,5 +1,13 @@
 @import '../../styles/mixins.scss';
 
+.captureIcon{
+  position: relative;
+  z-index: 1;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .overlay{
   width: 100vw;
   height: 100vh;
@@ -121,6 +129,32 @@
   }
 }
 
+.capturedImageContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: #f5f5f5;
+  h6{
+    font-family: 'Inter';
+    font-size: 16px;
+    max-width: 90%;
+    text-align: center;
+    font-weight: 500;
+  }
+  img{
+    height: 60%;
+    border-radius: 100px;
+  }
+  .buttonContainer{
+    display: flex;
+    margin: 40px 0;
+    button{
+      margin: 0 10px;
+    }
+  }
+}
 .lastStepContent{
   display: flex;
   justify-content: center;
