@@ -6,7 +6,7 @@
     padding: size("padding-extra-small") size("padding-regular");
     border-radius: size("border-radius-extra-small");
     font-family: 'Inter';
-    font-size: size("button-size");
+    font-size: font("button-size");
     cursor: pointer;
   }
 }

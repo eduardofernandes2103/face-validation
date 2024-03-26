@@ -1,6 +1,12 @@
 import { AxiosResponse } from "axios";
 import api from '../api';
-import { CreateFreeTicketsPayload, CreateFreeTicketsSuccessResponse, FreeTicketsSuccessResponse } from "@/server/model/tickets/tickets.model";
+import { 
+  CreateFreeTicketsPayload, 
+  CreateFreeTicketsSuccessResponse, 
+  FreeTicketsSuccessResponse, 
+  GenerateCredentialsImagePayload, 
+  GenerateCredentialsImageSuccessResponse 
+} from "@/server/model/tickets/tickets.model";
 
 const ticketsService = () => {
   const getFreeTickets = async (token: string): Promise<AxiosResponse<FreeTicketsSuccessResponse | undefined>> => {
@@ -19,9 +25,24 @@ const ticketsService = () => {
     })
   }
 
+  const generateCredentialsImage = async (
+    image: GenerateCredentialsImagePayload, 
+    validationCode: string, 
+    cpf: string
+  ): Promise<AxiosResponse<GenerateCredentialsImageSuccessResponse | undefined>> => {
+    const formData = new FormData();
+    formData.append('file', image.file);
+    return api.post(`/free-tickets/${validationCode}/${cpf}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+  }
+
   return {
     getFreeTickets,
-    createFreeTickets
+    createFreeTickets,
+    generateCredentialsImage
   }
 }
 

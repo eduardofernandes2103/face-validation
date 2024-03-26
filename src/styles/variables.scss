@@ -1,6 +1,8 @@
 @use "sass:map";
 
 $atmk-color: (
+  "almost-white": #f5f5f5,
+  "almost-black": #121212,
   "lightest": #ffffff,
   "darkest": #000000,
   "background": #f1f2f3,
@@ -24,7 +26,7 @@ $atmk-color: (
   "text-primary": #333333,
   "text-secondary": #767676,
   "text-tertiary": #5C677D,
-  "main": #398CDA,
+  "main": #0172af,
   "bright": #00B4D8,
   "light": #cae9ff,
   "dark": #00158a,
