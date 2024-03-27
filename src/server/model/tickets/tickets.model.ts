@@ -3,7 +3,7 @@ export interface FreeTicketsInterface{
   cpf: string | null,
   client_name: string,
   client_email: string,
-  client_phone_number: string,
+  client_phone_number?: string,
   selfie_image: string | null,
   qr_code_image: string | null,
   vaidation_code: string | null,
@@ -26,7 +26,7 @@ export interface FreeTicketsErrorResponse{
 export interface CreateFreeTicketsPayload{
   client_name: string,
   client_email: string,
-  client_phone_number: string,
+  client_phone_number?: string,
 }
 
 export interface CreateFreeTicketsSuccessResponse{
