@@ -21,7 +21,7 @@ export default function CreateTickets(){
   const formSchema = yup.object().shape({
     client_name: yup.string().required('Campo obrigatório'),
     client_email: yup.string().required('Campo obrigatório'),
-    client_phone_number: yup.string().required('Campo obrigatório')
+    client_phone_number: yup.string()
   })
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm<any>({resolver: yupResolver(formSchema)});
