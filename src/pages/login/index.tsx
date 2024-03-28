@@ -11,8 +11,11 @@ import { CircularProgress } from '@mui/material';
 import LogoSphere from '../../assets/images/sphere_simbolo_branco.svg';
 import LogoPrincipal from '../../assets/images/sphere_branco_principal_logo.svg';
 import Image from 'next/image';
+import { useMobile } from '@/hooks/useMobile';
+import RedirectToMobile from '@/components/redirectToMobile';
 
 export default function Login() {
+  const isMobile = useMobile();
   const router = useRouter();
 
   const [shouldOpenToastError, setShouldOpenToastError] = useState<boolean>(false);
@@ -46,37 +49,43 @@ export default function Login() {
   }
 
   return (
-    <div className={styles.overlay} onClick={handleShowLogin}>
-      <div className={styles.container}>
-        <div className={styles.innerContainer} style={{ top: showLogin ? '200px' : '-300px' }}>
-          <h2>Face Validation</h2>
-          <span>Preencha seus dados para entrar na aplicação</span>
-          <form onSubmit={handleSubmit(onSubmitFunction)}>
-            <input {...register('email')} placeholder="Digite seu email" />
+    <>
+      {isMobile ? (
+        <div className={styles.overlay} onClick={handleShowLogin}>
+          <div className={styles.container}>
+            <div className={styles.innerContainer} style={{ top: showLogin ? '200px' : '-300px' }}>
+              <h2>Face Validation</h2>
+              <span>Preencha seus dados para entrar na aplicação</span>
+              <form onSubmit={handleSubmit(onSubmitFunction)}>
+                <input {...register('email')} placeholder="Digite seu email" />
 
-            <input {...register('password')} type='password' placeholder="Digite sua senha"/>
+                <input {...register('password')} type='password' placeholder="Digite sua senha"/>
 
-            {isLoading ? (
-              <CircularProgress />
-            ) : (
-              <button type="submit">Entrar</button>
-            )}
-          </form>
-          <div className={`${styles.footer} ${showLogin ? styles.visible : ''}`}>
-            <Image src={LogoPrincipal} alt='logo-sphere-cyber-solutions' />
+                {isLoading ? (
+                  <CircularProgress />
+                ) : (
+                  <button type="submit">Entrar</button>
+                )}
+              </form>
+              <div className={`${styles.footer} ${showLogin ? styles.visible : ''}`}>
+                <Image src={LogoPrincipal} alt='logo-sphere-cyber-solutions' />
+              </div>
+              <Toast shouldOpenToast={shouldOpenToastError}
+                shouldCloseToast={() => setShouldOpenToastError(false)} 
+                toastTitle="Algo deu errado" type='error'>
+                Confira se seu email ou senha estão corretos.
+              </Toast>
+            </div>
+            <div className={styles.firstLayer} style={{ opacity: showLogin ? '0' : '1' }}>
+              <Image src={LogoSphere} alt='sphere-logo'/>
+              <h3>Clique para fazer login</h3>
+            </div>
           </div>
-          <Toast shouldOpenToast={shouldOpenToastError}
-            shouldCloseToast={() => setShouldOpenToastError(false)} 
-            toastTitle="Algo deu errado" type='error'>
-            Confira se seu email ou senha estão corretos.
-          </Toast>
         </div>
-        <div className={styles.firstLayer} style={{ opacity: showLogin ? '0' : '1' }}>
-          <Image src={LogoSphere} alt='sphere-logo'/>
-          <h3>Clique para fazer login</h3>
-        </div>
-      </div>
-    </div>
+      ) : (
+        <RedirectToMobile isDesktop />
+      )}
+    </>
   );
 }
 
