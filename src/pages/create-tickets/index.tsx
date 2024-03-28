@@ -52,8 +52,7 @@ export default function CreateTickets(){
 
   return(
     <>
-      {(isMobile === true || isMobile === undefined) ? (
-        <div className={styles.container}>
+      <div className={styles.container}>
         <div className={styles.content}>
           <h2>Gerar cortesia</h2>
           <span>Preencha os dados para gerar uma nova cortesia</span>
@@ -93,9 +92,8 @@ export default function CreateTickets(){
           </Toast>
         </div>
       </div>
-      ) : (
-        <RedirectToMobile isDesktop />
-      )}
+
+      <RedirectToMobile isDesktop={isMobile === false && true} />  
     </>
     
   )

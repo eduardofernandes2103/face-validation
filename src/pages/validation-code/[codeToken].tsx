@@ -17,23 +17,19 @@ export default function CodeToken(){
 
   return(
     <>
-      {(isMobile === true || isMobile === undefined) ? (
-        <>
-          <UserStepOne shouldRender={step === 1 ? true : false} />
-          <UserStepTwo shouldRender={step === 2 ? true : false} />
-          <UserStepThree shouldRender={step === 3 ? true : false} />
-          <UserStepFour shouldRender={step === 4 ? true : false} codeValidation={codeToken}/>
-          <UserStepFive shouldRender={step === 5 ? true : false} />
-          <Toast 
-            type="error"
-            toastTitle="Ops ..." 
-            shouldOpenToast={toastBehavior}
-            shouldCloseToast={() => setToastBehavior(false)} 
-          >A Selfie que você enviou não cumpre as nossas diretrizes, tente novamente!</Toast>
-        </>
-      ) : (
-        <RedirectToMobile isDesktop />
-      )}
+      <UserStepOne shouldRender={step === 1 ? true : false} />
+      <UserStepTwo shouldRender={step === 2 ? true : false} />
+      <UserStepThree shouldRender={step === 3 ? true : false} />
+      <UserStepFour shouldRender={step === 4 ? true : false} codeValidation={codeToken}/>
+      <UserStepFive shouldRender={step === 5 ? true : false} />
+      <Toast 
+        type="error"
+        toastTitle="Ops ..." 
+        shouldOpenToast={toastBehavior}
+        shouldCloseToast={() => setToastBehavior(false)} 
+      >A Selfie que você enviou não cumpre as nossas diretrizes, tente novamente!</Toast>
+  
+      <RedirectToMobile isDesktop={isMobile === false && true} />  
     </>
   )
 }

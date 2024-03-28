@@ -50,41 +50,38 @@ export default function Login() {
 
   return (
     <>
-      {(isMobile === true || isMobile === undefined) ? (
-        <div className={styles.overlay} onClick={handleShowLogin}>
-          <div className={styles.container}>
-            <div className={styles.innerContainer} style={{ top: showLogin ? '200px' : '-300px' }}>
-              <h2>Face Validation</h2>
-              <span>Preencha seus dados para entrar na aplicação</span>
-              <form onSubmit={handleSubmit(onSubmitFunction)}>
-                <input {...register('email')} placeholder="Digite seu email" />
+      <div className={styles.overlay} onClick={handleShowLogin}>
+        <div className={styles.container}>
+          <div className={styles.innerContainer} style={{ top: showLogin ? '200px' : '-300px' }}>
+            <h2>Face Validation</h2>
+            <span>Preencha seus dados para entrar na aplicação</span>
+            <form onSubmit={handleSubmit(onSubmitFunction)}>
+              <input {...register('email')} placeholder="Digite seu email" />
 
-                <input {...register('password')} type='password' placeholder="Digite sua senha"/>
+              <input {...register('password')} type='password' placeholder="Digite sua senha"/>
 
-                {isLoading ? (
-                  <CircularProgress />
-                ) : (
-                  <button type="submit">Entrar</button>
-                )}
-              </form>
-              <div className={`${styles.footer} ${showLogin ? styles.visible : ''}`}>
-                <Image src={LogoPrincipal} alt='logo-sphere-cyber-solutions' />
-              </div>
-              <Toast shouldOpenToast={shouldOpenToastError}
-                shouldCloseToast={() => setShouldOpenToastError(false)} 
-                toastTitle="Algo deu errado" type='error'>
-                Confira se seu email ou senha estão corretos.
-              </Toast>
+              {isLoading ? (
+                <CircularProgress />
+              ) : (
+                <button type="submit">Entrar</button>
+              )}
+            </form>
+            <div className={`${styles.footer} ${showLogin ? styles.visible : ''}`}>
+              <Image src={LogoPrincipal} alt='logo-sphere-cyber-solutions' />
             </div>
-            <div className={styles.firstLayer} style={{ opacity: showLogin ? '0' : '1' }}>
-              <Image src={LogoSphere} alt='sphere-logo'/>
-              <h3>Clique para fazer login</h3>
-            </div>
+            <Toast shouldOpenToast={shouldOpenToastError}
+              shouldCloseToast={() => setShouldOpenToastError(false)} 
+              toastTitle="Algo deu errado" type='error'>
+              Confira se seu email ou senha estão corretos.
+            </Toast>
+          </div>
+          <div className={styles.firstLayer} style={{ opacity: showLogin ? '0' : '1' }}>
+            <Image src={LogoSphere} alt='sphere-logo'/>
+            <h3>Clique para fazer login</h3>
           </div>
         </div>
-      ) : (
-        <RedirectToMobile isDesktop />
-      )}
+      </div>
+      <RedirectToMobile isDesktop={isMobile === false && true} />
     </>
   );
 }

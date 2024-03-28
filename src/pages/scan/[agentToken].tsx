@@ -60,26 +60,23 @@ export default function AgentToken(){
 
   return(
     <>
-      {(isMobile === true || isMobile === undefined) ? (
-        <div className={styles.scanContainer}>
-          <Webcam
-            onClick={() => handleCapture()}
-            audio={false}
-            ref={webcamRef}
-            mirrored={false}
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            screenshotFormat="image/jpeg"
-          />
-          { 
-            (!hasFreeTicket && !shouldScanQRModal) 
-            && <FontAwesomeIcon icon={faCamera} size={'3x'} className={styles.captureIcon} color={'#ffffff'}  onClick={() => handleCapture()}/>
-          }
-          {hasFreeTicket && <AlertSuccessModal onCloseModal={() => refreshImage()} />}
-          {shouldScanQRModal && <AlertErrorModal onCloseModal={() => openQRCodeScan()} />}
-        </div>
-      ) : (
-        <RedirectToMobile isDesktop />
-      )}
+      <div className={styles.scanContainer}>
+        <Webcam
+          onClick={() => handleCapture()}
+          audio={false}
+          ref={webcamRef}
+          mirrored={false}
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          screenshotFormat="image/jpeg"
+        />
+        { 
+          (!hasFreeTicket && !shouldScanQRModal) 
+          && <FontAwesomeIcon icon={faCamera} size={'3x'} className={styles.captureIcon} color={'#ffffff'}  onClick={() => handleCapture()}/>
+        }
+        {hasFreeTicket && <AlertSuccessModal onCloseModal={() => refreshImage()} />}
+        {shouldScanQRModal && <AlertErrorModal onCloseModal={() => openQRCodeScan()} />}
+      </div>
+      <RedirectToMobile isDesktop={isMobile === false && true} />
     </>
   )
 }

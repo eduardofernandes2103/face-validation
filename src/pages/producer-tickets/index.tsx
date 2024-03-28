@@ -32,31 +32,28 @@ export default function ProducerTickets(){
   
   return(
     <>
-      {(isMobile === true || isMobile === undefined) ? (
-        <div className={styles.container}>
-          <div className={styles.content}>
-            <h2>Lista de cortesias</h2>
-            <span>Cortesias geradas: {freeTickets?.length}</span>
-            <div className={styles.buttonWrapper}>
-              <Button isDefault onClick={() => handleRedirectToCreateTickets()}>Gerar cortesia</Button>
-            </div>
-            {freeTickets && (
-              <div>
-                {freeTickets?.map((ticket: any, index: any) => (
-                  <div key={index} className={styles.ticket}>
-                    <p>{ticket.client_name}</p>
-                    {ticket.is_approved === true && (
-                      <FontAwesomeIcon icon={faCircleCheck} className={styles.icon} />
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <h2>Lista de cortesias</h2>
+          <span>Cortesias geradas: {freeTickets?.length}</span>
+          <div className={styles.buttonWrapper}>
+            <Button isDefault onClick={() => handleRedirectToCreateTickets()}>Gerar cortesia</Button>
           </div>
+          {freeTickets && (
+            <div>
+              {freeTickets?.map((ticket: any, index: any) => (
+                <div key={index} className={styles.ticket}>
+                  <p>{ticket.client_name}</p>
+                  {ticket.is_approved === true && (
+                    <FontAwesomeIcon icon={faCircleCheck} className={styles.icon} />
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-      ) : (
-        <RedirectToMobile isDesktop />
-      )}
+      </div>
+      <RedirectToMobile isDesktop={isMobile === false && true} />
     </>
   )
 }
