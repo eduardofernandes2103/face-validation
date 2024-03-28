@@ -22,6 +22,10 @@ export default function AgentToken(){
   const [ shouldScanQRModal, setShouldScanQRModal ] = useState<boolean>(false);
   const [ shouldOpenQRCam, setShouldOpenQRCam ] = useState<boolean>(false)
 
+  const videoConstraints = {
+    facingMode: { exact: "environment" } // Isso seleciona a câmera traseira
+  };
+
   const handleCapture = () => {
     if (webcamRef.current && !hasFreeTicket && !shouldScanQRModal) {
       const imageSrc = webcamRef.current.getScreenshot();
@@ -83,6 +87,7 @@ export default function AgentToken(){
               mirrored={false}
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               screenshotFormat="image/jpeg"
+              videoConstraints={videoConstraints}
             />
           )
         }
