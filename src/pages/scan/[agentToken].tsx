@@ -25,7 +25,7 @@ export default function AgentToken(){
   const videoConstraints = {
     width: 1280,
     height: 720,
-    facingMode: "user"
+    facingMode: "environment"
   };
 
   const handleCapture = () => {
