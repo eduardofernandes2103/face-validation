@@ -50,7 +50,7 @@ export default function Login() {
 
   return (
     <>
-      {isMobile ? (
+      {(isMobile === true || isMobile === undefined) ? (
         <div className={styles.overlay} onClick={handleShowLogin}>
           <div className={styles.container}>
             <div className={styles.innerContainer} style={{ top: showLogin ? '200px' : '-300px' }}>

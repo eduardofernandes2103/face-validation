@@ -52,7 +52,7 @@ export default function CreateTickets(){
 
   return(
     <>
-      {isMobile ? (
+      {(isMobile === true || isMobile === undefined) ? (
         <div className={styles.container}>
         <div className={styles.content}>
           <h2>Gerar cortesia</h2>

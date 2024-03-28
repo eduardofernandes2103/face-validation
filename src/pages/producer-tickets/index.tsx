@@ -32,7 +32,7 @@ export default function ProducerTickets(){
   
   return(
     <>
-      {isMobile ? (
+      {(isMobile === true || isMobile === undefined) ? (
         <div className={styles.container}>
           <div className={styles.content}>
             <h2>Lista de cortesias</h2>
