@@ -1,5 +1,10 @@
 @import '../../styles/mixins.scss';
 
+.scanContainer{
+  width: 100vw;
+  height: 100vh;
+}
+
 .captureIcon{
   position: relative;
   z-index: 1;

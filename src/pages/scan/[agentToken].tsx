@@ -5,16 +5,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons/faCamera';
 import { dataURItoFile } from '@/utils/image-utils';
 import scanController from '@/server/controller/scan/scan-controller';
+import AlertSuccessModal from '@/components/modal/AlertSuccessModal';
+import AlertErrorModal from '@/components/modal/AlertErrorModal';
 
 export default function AgentToken(){
   const webcamRef = React.useRef<any>(null);
 
   const [ capturedImage, setCapturedImage] = useState<File | null>(null);
   const [ hasFreeTicket, setHasFreeTicket] = useState<boolean>(false);
-  const [ shouldScanQR, setShouldScanQR ] = useState<boolean>(false);
+  const [ shouldScanQRModal, setShouldScanQRModal ] = useState<boolean>(false);
 
   const handleCapture = () => {
-    if (webcamRef.current) {
+    if (webcamRef.current && !hasFreeTicket && !shouldScanQRModal) {
       const imageSrc = webcamRef.current.getScreenshot();
       const image = dataURItoFile(imageSrc, 'client.jpeg');
 
@@ -25,6 +27,11 @@ export default function AgentToken(){
   const refreshImage = () => {
     setCapturedImage(null);
     setHasFreeTicket(false);
+  }
+
+  const openQRCodeScan = () => {
+    setCapturedImage(null);
+    setShouldScanQRModal(false);
   }
 
   useEffect(()=> {
@@ -40,15 +47,15 @@ export default function AgentToken(){
             return;
           }
           setHasFreeTicket(false);
-          setShouldScanQR(true);
+          setShouldScanQRModal(true);
           return;
         })
-        .catch(() => {setShouldScanQR(true)})
+        .catch(() => {setShouldScanQRModal(true)})
     }
-  }, [ capturedImage, setCapturedImage])
+  }, [ capturedImage, setCapturedImage ])
 
   return(
-    <>
+    <div className={styles.scanContainer}>
       <Webcam
         onClick={() => handleCapture()}
         audio={false}
@@ -58,11 +65,11 @@ export default function AgentToken(){
         screenshotFormat="image/jpeg"
       />
       { 
-        (!hasFreeTicket && !shouldScanQR) 
+        (!hasFreeTicket && !shouldScanQRModal) 
         && <FontAwesomeIcon icon={faCamera} size={'3x'} className={styles.captureIcon} color={'#ffffff'}  onClick={() => handleCapture()}/>
       }
-      {hasFreeTicket && <button onClick={() => refreshImage()}>Escanear Próximo</button>}
-      {shouldScanQR && <button>qr-code</button>}
-    </>
+      {hasFreeTicket && <AlertSuccessModal onCloseModal={() => refreshImage()} />}
+      {shouldScanQRModal && <AlertErrorModal onCloseModal={() => openQRCodeScan()} />}
+    </div>
   )
 }
