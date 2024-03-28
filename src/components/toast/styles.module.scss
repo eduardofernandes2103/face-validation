@@ -1,19 +1,44 @@
 @import '../../styles/mixins.scss';
 
+.sucess{
+  border-left: 6px solid #96e072;
+}
+
+.error{
+  border-left: 6px solid #da2c38;
+}
+
+.dark{
+  background-color: rgba(51, 51, 51, 0.8) !important;
+  .content{
+    h4{
+      color: color("lightest") !important;
+    }
+    p{
+      color: color("lightest") !important;
+    }
+  }
+  button{
+    color: color("lightest") !important;
+  }
+}
+
 .container{
   display: flex;
-  border-radius: size("border-radius-extra-small");
+  border-radius: 12px;
   max-width: 300px;
   position: fixed;
   right: size("margin-regular");
-  bottom: size("margin-regular");
+  top: size("margin-regular");
   padding: 0 size("padding-small");
   box-shadow: shadow("shadow-8");
-  background-color: color("lightest");
+  background-color: rgba(255, 255, 255, 0.8);
+  font-family: 'Inter';
   .content{
     h4{
       font-weight: font("body1-weight");
       color: color("text-primary");
+      margin: 16px 0;
     }
     p{
       font-size: font("subtitle2-size");
