@@ -9,6 +9,8 @@ import AlertSuccessModal from '@/components/modal/AlertSuccessModal';
 import AlertErrorModal from '@/components/modal/AlertErrorModal';
 import { useMobile } from '@/hooks/useMobile';
 import RedirectToMobile from '@/components/redirectToMobile';
+import QRCodeReader from '@/components/qrReader';
+import Button from '@/components/button';
 
 export default function AgentToken(){
   const isMobile = useMobile();
@@ -18,6 +20,7 @@ export default function AgentToken(){
   const [ capturedImage, setCapturedImage] = useState<File | null>(null);
   const [ hasFreeTicket, setHasFreeTicket] = useState<boolean>(false);
   const [ shouldScanQRModal, setShouldScanQRModal ] = useState<boolean>(false);
+  const [ shouldOpenQRCam, setShouldOpenQRCam ] = useState<boolean>(false)
 
   const handleCapture = () => {
     if (webcamRef.current && !hasFreeTicket && !shouldScanQRModal) {
@@ -31,11 +34,14 @@ export default function AgentToken(){
   const refreshImage = () => {
     setCapturedImage(null);
     setHasFreeTicket(false);
+    setShouldScanQRModal(false);
+    setShouldOpenQRCam(false);
   }
 
   const openQRCodeScan = () => {
     setCapturedImage(null);
     setShouldScanQRModal(false);
+    setShouldOpenQRCam(true);
   }
 
   useEffect(()=> {
@@ -61,16 +67,27 @@ export default function AgentToken(){
   return(
     <>
       <div className={styles.scanContainer}>
-        <Webcam
-          onClick={() => handleCapture()}
-          audio={false}
-          ref={webcamRef}
-          mirrored={false}
-          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-          screenshotFormat="image/jpeg"
-        />
+        {
+          shouldOpenQRCam ? (
+            <>
+              <div className={styles.qrCodeContainer}>
+                <QRCodeReader />
+                <button onClick={() => refreshImage()}>Escanear Rosto</button>
+              </div>
+            </>
+          ) : (
+            <Webcam
+              onClick={() => handleCapture()}
+              audio={false}
+              ref={webcamRef}
+              mirrored={false}
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              screenshotFormat="image/jpeg"
+            />
+          )
+        }
         { 
-          (!hasFreeTicket && !shouldScanQRModal) 
+          (!hasFreeTicket && !shouldScanQRModal && !shouldOpenQRCam) 
           && <FontAwesomeIcon icon={faCamera} size={'3x'} className={styles.captureIcon} color={'#ffffff'}  onClick={() => handleCapture()}/>
         }
         {hasFreeTicket && <AlertSuccessModal onCloseModal={() => refreshImage()} />}
