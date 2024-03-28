@@ -7,8 +7,12 @@ import { dataURItoFile } from '@/utils/image-utils';
 import scanController from '@/server/controller/scan/scan-controller';
 import AlertSuccessModal from '@/components/modal/AlertSuccessModal';
 import AlertErrorModal from '@/components/modal/AlertErrorModal';
+import { useMobile } from '@/hooks/useMobile';
+import RedirectToMobile from '@/components/redirectToMobile';
 
 export default function AgentToken(){
+  const isMobile = useMobile();
+
   const webcamRef = React.useRef<any>(null);
 
   const [ capturedImage, setCapturedImage] = useState<File | null>(null);
@@ -55,21 +59,27 @@ export default function AgentToken(){
   }, [ capturedImage, setCapturedImage ])
 
   return(
-    <div className={styles.scanContainer}>
-      <Webcam
-        onClick={() => handleCapture()}
-        audio={false}
-        ref={webcamRef}
-        mirrored={false}
-        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-        screenshotFormat="image/jpeg"
-      />
-      { 
-        (!hasFreeTicket && !shouldScanQRModal) 
-        && <FontAwesomeIcon icon={faCamera} size={'3x'} className={styles.captureIcon} color={'#ffffff'}  onClick={() => handleCapture()}/>
-      }
-      {hasFreeTicket && <AlertSuccessModal onCloseModal={() => refreshImage()} />}
-      {shouldScanQRModal && <AlertErrorModal onCloseModal={() => openQRCodeScan()} />}
-    </div>
+    <>
+      {(isMobile === true || isMobile === undefined) ? (
+        <div className={styles.scanContainer}>
+          <Webcam
+            onClick={() => handleCapture()}
+            audio={false}
+            ref={webcamRef}
+            mirrored={false}
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            screenshotFormat="image/jpeg"
+          />
+          { 
+            (!hasFreeTicket && !shouldScanQRModal) 
+            && <FontAwesomeIcon icon={faCamera} size={'3x'} className={styles.captureIcon} color={'#ffffff'}  onClick={() => handleCapture()}/>
+          }
+          {hasFreeTicket && <AlertSuccessModal onCloseModal={() => refreshImage()} />}
+          {shouldScanQRModal && <AlertErrorModal onCloseModal={() => openQRCodeScan()} />}
+        </div>
+      ) : (
+        <RedirectToMobile isDesktop />
+      )}
+    </>
   )
 }
