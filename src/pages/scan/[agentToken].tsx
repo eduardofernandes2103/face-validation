@@ -23,7 +23,7 @@ export default function AgentToken(){
   const [ shouldOpenQRCam, setShouldOpenQRCam ] = useState<boolean>(false)
 
   const videoConstraints = {
-    facingMode: { exact: "environment" } // Isso seleciona a câmera traseira
+    facingMode: "environment"
   };
 
   const handleCapture = () => {
