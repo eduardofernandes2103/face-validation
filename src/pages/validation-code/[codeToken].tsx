@@ -6,8 +6,11 @@ import UserStepTwo from "@/components/userSteps/UserStep2";
 import UserStepThree from "@/components/userSteps/UserStep3";
 import UserStepFour from "@/components/userSteps/UserStep4";
 import UserStepFive from "@/components/userSteps/UserStep5";
+import { useMobile } from "@/hooks/useMobile";
+import RedirectToMobile from "@/components/redirectToMobile";
 
 export default function CodeToken(){
+  const isMobile = useMobile();
   const router = useRouter();
   const codeToken = router.query.codeToken
   const { step, toastBehavior, setToastBehavior } = UseStepper()
@@ -25,6 +28,8 @@ export default function CodeToken(){
         shouldOpenToast={toastBehavior}
         shouldCloseToast={() => setToastBehavior(false)} 
       >A Selfie que você enviou não cumpre as nossas diretrizes, tente novamente!</Toast>
+  
+      <RedirectToMobile isDesktop={isMobile === false && true} />  
     </>
   )
 }

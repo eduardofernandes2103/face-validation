@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 export const useMobile = () => {
-    const [isMobile, setIsMobile] = useState(false)
+    const [isMobile, setIsMobile] = useState<boolean | undefined>()
     useEffect(() => {
         const userAgent = navigator.userAgent
         const isAndroid = /Android/.test(userAgent)
