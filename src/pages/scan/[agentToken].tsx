@@ -23,7 +23,9 @@ export default function AgentToken(){
   const [ shouldOpenQRCam, setShouldOpenQRCam ] = useState<boolean>(false)
 
   const videoConstraints = {
-    facingMode: "environment"
+    width: 1280,
+    height: 720,
+    facingMode: "user"
   };
 
   const handleCapture = () => {
