@@ -1,7 +1,7 @@
 import styles from './styles.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
-import LogoPrincipal from '../../assets/images/sphere_preto_principal_logo.svg'
+import LogoPrincipal from '../../assets/images/sphere_branco_principal_logo.svg'
 import Image from 'next/image';
 import { StepProps } from '@/assets/types/stepperProps';
 

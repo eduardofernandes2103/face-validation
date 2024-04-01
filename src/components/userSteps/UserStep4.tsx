@@ -70,7 +70,7 @@ const UserStepFour: React.FC<StepFourProps> = ({shouldRender, codeValidation}) =
                 onClick={() => handleCapture()}
                 audio={false}
                 ref={webcamRef}
-                mirrored={false}
+                mirrored={true}
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 screenshotFormat="image/jpeg"
               />
